@@ -25,13 +25,13 @@ export default function Header() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="create-user">
-                  Create User
+                <Link className="nav-link" to="booked-seats">
+                  My Bookings
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="show-user">
-                  Show User
+                <Link className="nav-link" to="matches">
+                  Show Matches
                 </Link>
               </li>
             </ul>

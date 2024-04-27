@@ -3,8 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Loader from "../Common/Loader";
 
-const ShowUser = () => {
-  const showUserApi = "http://localhost:3000/user";
+const ShowMatches = () => {
+  const showMatchesApi = "http://localhost:8000/matches";
 
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +14,7 @@ const ShowUser = () => {
     console.log("id : -", id);
     setIsLoading(true);
     try {
-      const response = await fetch(showUserApi.concat("/") + id, {
+      const response = await fetch(showMatchesApi.concat("/") + id, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -34,7 +34,7 @@ const ShowUser = () => {
 
   const getUsers = () => {
     axios
-      .get(showUserApi)
+      .get(showMatchesApi)
       .then((res) => {
         setUser(res.data);
       })
@@ -44,7 +44,7 @@ const ShowUser = () => {
   };
 
   if (user.length < 0) {
-    return <h1>no user found</h1>;
+    return <h1>no Matches found</h1>;
   } else {
     return (
       <div className="mt-5">
@@ -53,34 +53,37 @@ const ShowUser = () => {
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Actions</th>
+              <th>MatchId</th>
+              <th>Match Date</th>
+              <th>Match Time</th>
+              <th>Match Name</th>
+              <th>Stadium Id</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {user?.map((item, i) => {
+              const { match_id, match_date, match_time, match_name, stadium_id } = item;
               return (
                 <tr key={i + 1}>
-                  <td>{i + 1}</td>
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.phone}</td>
+                  <td>{match_id}</td>
+                  <td>{match_date}</td>
+                  <td>{match_time}</td>
+                  <td>{match_name}</td>
+                  <td>{stadium_id}</td>
                   <td>
-                    <Link to={`/edit-user/${item.id}`}>
+                    {/* <Link to={`/edit-user/${item.id}`}>
                       <i className="fa fa-pencil" aria-hidden="true"></i>
-                    </Link>
-                    <Link to={`/user/${item.id}`}>
+                    </Link> */}
+                    <Link to={`/seat-available/${match_id}`}>
                       <i className="fa fa-eye" aria-hidden="true"></i>
                     </Link>
 
-                    <i
+                    {/* <i
                       className="fa fa-trash-o"
                       aria-hidden="true"
                       onClick={() => handelDelete(item.id)}
-                    ></i>
+                    ></i> */}
                   </td>
                 </tr>
               );
@@ -92,4 +95,4 @@ const ShowUser = () => {
   }
 };
 
-export default ShowUser;
+export default ShowMatches;
