@@ -1,10 +1,9 @@
 # Getting Started with Create React App
 
-This project realate to react CRUD
+This project is a ticketbooking app. Here user can See available tickets and can book them. Users can also check their booked tickets
 
 ## How to start this project
  
-    step 1: git clone https://github.com/bhairabpatra/crud-react-app.git
+    step 1: git clone https://github.com/vikaskrsharma/TicketBookingFrontend.git
     step 2: npm i
-    step 3: json-server --watch db.json // http://192.168.1.5:3000
-    step 4:  npm  // http://192.168.1.5:3001
+    step 3:  npm  start
