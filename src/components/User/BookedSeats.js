@@ -6,14 +6,31 @@ import Loader from "../Common/Loader";
 const BookedSeats = ({ }) => {
     const { matchId } = useParams();
     const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loggedInUser, setLoggedInUser] = useState();
     const [bookedSeats, setBookedSeats] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const seatAvailableApi = `http://192.168.1.5:8000/get_bookings`;
+    const seatAvailableApi = `https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/get_bookings?user_id=${loggedInUser}`;
+    const loginApi = "https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/login_user";
 
     useEffect(() => {
         getBookedSeats();
     }, []);
+
+    const handleLoginClick = () => {
+        axios
+            .get(loginApi)
+            .then((res) => {
+                if (res.data.user_id) {
+                    setLoggedInUser(res.data.user_id);
+                    setIsLoggedIn(true)
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 
     const getBookedSeats = () => {
         axios
@@ -25,6 +42,13 @@ const BookedSeats = ({ }) => {
                 console.log(err);
             });
     };
+
+    if (!isLoggedIn) {
+        return <div className="loginBlock">
+            <h1>Please Login to View Your Bookings</h1>
+            <button onClick={handleLoginClick}>Login</button>
+        </div>
+    }
 
     if (bookedSeats.length < 0) {
         return <h1>no Matches found</h1>;

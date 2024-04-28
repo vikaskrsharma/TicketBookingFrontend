@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Loader from "../Common/Loader";
 
 const ShowMatches = () => {
-  const showMatchesApi = "http://192.168.1.5:8000/matches";
+  const showMatchesApi = "https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/matches";
 
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

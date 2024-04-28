@@ -6,7 +6,7 @@ import Loader from "../Common/Loader";
 const SeatAvailable = ({ }) => {
     const { matchId } = useParams();
     const navigate = useNavigate();
-    const seatAvailableApi = `http://192.168.1.5:8000/availability/${matchId}`;
+    const seatAvailableApi = `https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/availability/${matchId}`;
 
     const [seatAvailable, setSeatAvailable] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +36,7 @@ const SeatAvailable = ({ }) => {
             match_id: Number(matchId),
             seat_ids: bookedSeat,
         }
-        const response = await axios.post("http://192.168.1.5:8000/book_seats", payload, { headers: { 'Content-Type': 'application/json' } });
+        const response = await axios.post("https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/book_seats", payload, { headers: { 'Content-Type': 'application/json' } });
         console.log(response);
 
         if (response.data === 'success' && response.status === 201) {
