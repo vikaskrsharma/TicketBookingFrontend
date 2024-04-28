@@ -6,5 +6,5 @@ This project realate to react CRUD
  
     step 1: git clone https://github.com/bhairabpatra/crud-react-app.git
     step 2: npm i
-    step 3: json-server --watch db.json // http://localhost:3000
-    step 4:  npm  // http://localhost:3001
+    step 3: json-server --watch db.json // http://192.168.1.5:3000
+    step 4:  npm  // http://192.168.1.5:3001

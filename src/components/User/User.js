@@ -5,7 +5,7 @@ import "./User.css";
 const EditUser = () => {
   const [user, setUser] = useState([]);
   const { id } = useParams();
-  const getUserApi = "http://localhost:3000/user";
+  const getUserApi = "http://192.168.1.5:3000/user";
 
   useEffect(() => {
     getUser();
@@ -25,28 +25,28 @@ const EditUser = () => {
   return (
     <div className="user mt-5">
       <table className="table table-bordered">
-    <thead>
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Name</td>
-        <td>{user.name}</td>
-      </tr>
-      <tr>
-        <td>Email</td>
-        <td>{user.email}</td>
-      </tr>
-      <tr>
-        <td>Phone</td>
-        <td>{user.phone}</td>
-      </tr>
-    </tbody>
-  </table>
+        <thead>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>{user.name}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{user.email}</td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>{user.phone}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

@@ -9,7 +9,7 @@ const BookedSeats = ({ }) => {
     const [bookedSeats, setBookedSeats] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const seatAvailableApi = `http://localhost:8000/get_bookings`;
+    const seatAvailableApi = `http://192.168.1.5:8000/get_bookings`;
 
     useEffect(() => {
         getBookedSeats();

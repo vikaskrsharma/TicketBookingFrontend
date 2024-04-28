@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loader from '../Common/Loader';
 import './User.css';
 const CreateUser = () => {
     const navigate = useNavigate();
-    const createUserApi = "http://localhost:3000/user"
+    const createUserApi = "http://192.168.1.5:3000/user"
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState({
@@ -35,7 +35,7 @@ const CreateUser = () => {
 
             if (response.ok) {
                 console.log('Form submitted successfully!');
-                setUser({name: "",email: "",phone: ""})
+                setUser({ name: "", email: "", phone: "" })
                 navigate('/show-user');
             } else {
                 console.error('Form submission failed!');
@@ -43,7 +43,7 @@ const CreateUser = () => {
 
         } catch (error) {
             setError(error.message);
-        } finally{
+        } finally {
             setIsLoading(false);
         }
     }
@@ -51,8 +51,8 @@ const CreateUser = () => {
     return (
         <div className='user-form'>
             <div className='heading'>
-            {isLoading && <Loader />}
-            {error && <p>Error: {error}</p>}
+                {isLoading && <Loader />}
+                {error && <p>Error: {error}</p>}
                 <p>User Form</p>
             </div>
             <form onSubmit={handelSubmit}>
