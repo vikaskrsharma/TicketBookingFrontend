@@ -1,17 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Loader from "../Common/Loader";
+import { MyContext } from '../../MyContext';
 
 const SeatAvailable = ({ }) => {
     const { matchId } = useParams();
     const navigate = useNavigate();
     const seatAvailableApi = `https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/availability/${matchId}`;
+    const { loggedInuser, setLoggedInUser } = useContext(MyContext);
+    const loginApi = "https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/login_user";
+
+
 
     const [seatAvailable, setSeatAvailable] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [bookedSeat, setBookedSeat] = useState([]);
+
+    const handleLoginClick = () => {
+        axios
+            .get(loginApi)
+            .then((res) => {
+                if (res.data.user_id) {
+                    setLoggedInUser(res.data.user_id);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 
     const handelDelete = async (id) => {
         console.log("id : -", id);
@@ -35,6 +53,7 @@ const SeatAvailable = ({ }) => {
         const payload = {
             match_id: Number(matchId),
             seat_ids: bookedSeat,
+            user_id: Number(loggedInuser),
         }
         const response = await axios.post("https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/book_seats", payload, { headers: { 'Content-Type': 'application/json' } });
         console.log(response);
@@ -127,7 +146,12 @@ const SeatAvailable = ({ }) => {
                     <div>
                         {bookedSeat.map(seat => <div>{seat}</div>)}
                     </div>
-                    <button onClick={handleBookingConfirm}>Confirm Booking</button>
+                    {loggedInuser ?
+                        <button onClick={handleBookingConfirm}>Confirm Booking</button>
+                        :
+                        <button onClick={handleLoginClick}>Please Login</button>
+                    }
+
                 </div>
             </div>
         );

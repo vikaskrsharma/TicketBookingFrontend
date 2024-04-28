@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Loader from "../Common/Loader";
+import { MyContext } from '../../MyContext';
 
 const ShowMatches = () => {
   const showMatchesApi = "https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/matches";
+  const { loggedInuser, setLoggedInUser } = useContext(MyContext);
+  console.log(loggedInuser);
 
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

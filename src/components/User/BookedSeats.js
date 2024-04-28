@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Loader from "../Common/Loader";
+import { MyContext } from '../../MyContext';
 
 const BookedSeats = ({ }) => {
     const { matchId } = useParams();
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [loggedInUser, setLoggedInUser] = useState();
+    const { loggedInuser, setLoggedInUser } = useContext(MyContext);
     const [bookedSeats, setBookedSeats] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const seatAvailableApi = `https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/get_bookings?user_id=${loggedInUser}`;
+    const seatAvailableApi = `https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/get_bookings?user_id=${loggedInuser}`;
     const loginApi = "https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/login_user";
 
     useEffect(() => {
@@ -33,20 +34,23 @@ const BookedSeats = ({ }) => {
     }
 
     const getBookedSeats = () => {
-        axios
-            .get(seatAvailableApi)
-            .then((res) => {
-                setBookedSeats(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        if (loggedInuser) {
+            axios
+                .get(seatAvailableApi)
+                .then((res) => {
+                    setBookedSeats(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+
     };
 
-    if (!isLoggedIn) {
-        return <div className="loginBlock">
+    if (!loggedInuser) {
+        return <div className="loginBlock" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
             <h1>Please Login to View Your Bookings</h1>
-            <button onClick={handleLoginClick}>Login</button>
+            <button onClick={handleLoginClick} style={{ padding: '5px 15px', color: 'white', borderRadius: '10px', background: '#2980b9' }}>Login</button>
         </div>
     }
 
