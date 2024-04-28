@@ -7,9 +7,9 @@ import { MyContext } from '../../MyContext';
 const SeatAvailable = ({ }) => {
     const { matchId } = useParams();
     const navigate = useNavigate();
-    const seatAvailableApi = `https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/availability/${matchId}`;
+    const seatAvailableApi = `https://o7mhxjfsxywgbwf7wkxhsrjg7m0ociul.lambda-url.us-east-1.on.aws/availability/${matchId}`;
     const { loggedInuser, setLoggedInUser } = useContext(MyContext);
-    const loginApi = "https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/login_user";
+    const loginApi = "https://o7mhxjfsxywgbwf7wkxhsrjg7m0ociul.lambda-url.us-east-1.on.aws/login_user";
 
 
 
@@ -55,7 +55,7 @@ const SeatAvailable = ({ }) => {
             seat_ids: bookedSeat,
             user_id: Number(loggedInuser),
         }
-        const response = await axios.post("https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/book_seats", payload, { headers: { 'Content-Type': 'application/json' } });
+        const response = await axios.post("https://o7mhxjfsxywgbwf7wkxhsrjg7m0ociul.lambda-url.us-east-1.on.aws/book_seats", payload, { headers: { 'Content-Type': 'application/json' } });
         console.log(response);
 
         if (response.data === 'success' && response.status === 201) {

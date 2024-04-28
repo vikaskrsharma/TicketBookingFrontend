@@ -12,8 +12,8 @@ const BookedSeats = ({ }) => {
     const [bookedSeats, setBookedSeats] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const seatAvailableApi = `https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/get_bookings?user_id=${loggedInuser}`;
-    const loginApi = "https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/login_user";
+    const seatAvailableApi = `https://o7mhxjfsxywgbwf7wkxhsrjg7m0ociul.lambda-url.us-east-1.on.aws/get_bookings?user_id=${loggedInuser}`;
+    const loginApi = "https://o7mhxjfsxywgbwf7wkxhsrjg7m0ociul.lambda-url.us-east-1.on.aws/login_user";
 
     useEffect(() => {
         getBookedSeats();

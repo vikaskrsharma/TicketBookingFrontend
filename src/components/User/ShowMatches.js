@@ -5,7 +5,7 @@ import Loader from "../Common/Loader";
 import { MyContext } from '../../MyContext';
 
 const ShowMatches = () => {
-  const showMatchesApi = "https://xwcotwaezwozognivffa4mmg2y0rbasv.lambda-url.us-east-1.on.aws/matches";
+  const showMatchesApi = "https://o7mhxjfsxywgbwf7wkxhsrjg7m0ociul.lambda-url.us-east-1.on.aws/matches";
   const { loggedInuser, setLoggedInUser } = useContext(MyContext);
   console.log(loggedInuser);
 
@@ -37,7 +37,12 @@ const ShowMatches = () => {
 
   const getUsers = () => {
     axios
-      .get(showMatchesApi)
+      .get(showMatchesApi, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       .then((res) => {
         setUser(res.data);
       })
